@@ -1,0 +1,14 @@
+<div class="modal-overlay" (click)="onClose(false)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">Confirmação</h3>
+    </div>
+    <div class="modal-body">
+      <p>{{ message }}</p>
+    </div>
+    <div class="modal-footer">
+      <app-button type="button" variant="outline" (click)="onClose(false)">Não</app-button>
+      <app-button type="button" variant="primary" (click)="onClose(true)">Sim</app-button>
+    </div>
+  </div>
+</div>

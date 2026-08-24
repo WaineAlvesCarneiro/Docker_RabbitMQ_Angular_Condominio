@@ -1,0 +1,150 @@
+<h2>{{ form.get('id')?.value ? 'Editar Empresa' : 'Cadastro de Empresa' }}</h2>
+
+<form [formGroup]="form" class="form-container" (ngSubmit)="salvar()" autocomplete="off">
+
+  <div *ngIf="form.get('id')?.value !== 0" class="form-group">
+    <app-input
+      label="Código"
+      type="number"
+      formControlName="id"
+      [readonly]="true"
+      [required]="false">
+    </app-input>
+  </div>
+
+  <div *ngIf="form.get('id')?.value !== 0" class="form-group">
+    <app-select
+        label="Status"
+        formControlName="ativo"
+        [options]="tiposEmpresaAtivo"
+        [error]="form.get('ativo')?.invalid && formSubmetido ? 'Selecione o status' : ''">
+    </app-select>
+  </div>
+
+  <app-input
+    label="Razão Social"
+    formControlName="razaoSocial"
+    [required]="true"
+    placeholder="Digite a razão social"
+    [error]="form.get('razaoSocial')?.invalid && formSubmetido ? 'Razão Social é obrigatória' : ''">
+  </app-input>
+
+  <app-input
+    label="Fantasia"
+    formControlName="fantasia"
+    placeholder="Nome fantasia">
+  </app-input>
+
+  <app-input
+    label="CNPJ"
+    formControlName="cnpj"
+    (blur)="validarCnpj()"
+    placeholder="00.000.000/0000-00"
+    maskName="cnpj"
+    [error]="cnpjInvalido ? 'CNPJ inválido.' : ''">
+  </app-input>
+
+  <app-select
+    label="Tipo de Condomínio"
+    formControlName="tipoDeCondominio"
+    [options]="tiposDeCondominio"
+    [error]="form.get('tipoDeCondominio')?.invalid && formSubmetido ? 'Selecione o tipo de condomínio' : ''">
+  </app-select>
+
+  <app-input
+    label="Nome"
+    formControlName="nome"
+    [required]="true"
+    [maxLength]="50"
+    [error]="form.get('nome')?.invalid && formSubmetido ? 'Nome é obrigatório.' : ''">
+  </app-input>
+
+  <app-input
+    label="Celular"
+    type="tel"
+    formControlName="celular"
+    placeholder="(99) 99999-9999"
+    maskName="celular"
+    [required]="true"
+    [error]="form.get('celular')?.invalid && formSubmetido ? 'Celular inválido ou obrigatório.' : ''">
+  </app-input>
+
+  <app-input label="E-mail" type="email" formControlName="email" 
+    [required]="true" [maxLength]="50" [error]="form.get('email')?.invalid && formSubmetido ? 'E-mail obrigatório ou formato inválido.' : ''">
+  </app-input>
+
+  <app-input
+    label="Telefone"
+    type="tel"
+    formControlName="telefone"
+    placeholder="(99) 9999-9999"
+    maskName="telefone">
+  </app-input>
+
+  <app-input
+    label="Senha"
+    type="password"
+    formControlName="senha"
+    [required]="true"
+    [error]="form.get('senha')?.invalid && formSubmetido ? 'Senha é obrigatória no cadastro.' : ''">
+  </app-input>
+
+  <app-input
+    label="Host"
+    formControlName="host"
+    [required]="true"
+    [error]="form.get('host')?.invalid && formSubmetido ? 'Host é obrigatório.' : ''">
+  </app-input>
+
+  <app-input
+    label="Porta"
+    type="number"
+    formControlName="porta"
+    [required]="true"
+    [error]="form.get('porta')?.invalid && formSubmetido ? 'Porta é obrigatória.' : ''">
+  </app-input>
+
+  <app-input
+    label="CEP"
+    formControlName="cep"
+    placeholder="00.000-000"
+    maskName="cep"
+    (input)="onCepInput($event)"
+    [required]="true"
+    [error]="form.get('cep')?.invalid && formSubmetido ? 'CEP é obrigatório.' : ''">
+  </app-input>
+
+  <app-input
+    label="UF"
+    formControlName="uf">
+  </app-input>
+
+  <app-input
+    label="Cidade"
+    formControlName="cidade">
+  </app-input>
+
+  <app-input
+    label="Endereço / Logradouro"
+    formControlName="endereco">
+  </app-input>
+
+  <app-input
+    label="Bairro"
+    formControlName="bairro">
+  </app-input>
+
+  <app-input
+    label="Complemento"
+    formControlName="complemento">
+  </app-input>
+
+  <div class="form-actions">
+    <app-button type="submit" variant="primary" size="md" [disabled]="isSaving || form.invalid">{{ isSaving ? 'Aguarde...' : 'Salvar' }}</app-button>
+    <app-button type="button" variant="outline" size="md" (click)="cancelar()">Cancelar</app-button>
+  </div>
+  <!-- DEBUG: botão temporário para inspecionar estado do formulário -->
+  <div style="margin-top:8px;">
+    <button type="button" (click)="logForm()" style="padding:6px 10px;">Debug: Log Form</button>
+  </div>
+</form>

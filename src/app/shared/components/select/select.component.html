@@ -1,0 +1,36 @@
+<div class="form-group">
+  <label
+    *ngIf="label"
+    class="form-label"
+    [ngClass]="{ required: required }">
+    {{ label }}
+  </label>
+
+  <select
+    [class]="getSelectClasses()"
+    class="form-control"
+    [disabled]="disabled"
+    [required]="required"
+    [multiple]="multiple"
+    (change)="onSelectedIndexChange($event)"
+    (blur)="onSelectBlur()">
+
+    <option *ngIf="!multiple" value="-1" [selected]="selectedIndex===-1" disabled>{{ placeholder }}</option>
+
+    <option *ngFor="let option of options; let i = index" [attr.value]="i" [disabled]="option.disabled" [selected]="i===selectedIndex">{{ option.label }}</option>
+
+  </select>
+
+  <span
+    *ngIf="hasError"
+    class="form-error">
+    {{ error }}
+  </span>
+
+  <span
+    *ngIf="hint && !hasError"
+    class="form-hint">
+    {{ hint }}
+  </span>
+
+</div>

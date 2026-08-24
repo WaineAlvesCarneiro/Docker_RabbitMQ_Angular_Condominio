@@ -1,0 +1,19 @@
+services:
+  front_angular_condominio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: front_angular_condominio
+    restart: unless-stopped
+    ports:
+      - "4200:8081"
+    environment:
+      NODE_ENV: production
+    networks:
+      - infra_net
+
+networks:
+  infra_net:
+    external: true
+    name: infra_net
+    driver: bridge
