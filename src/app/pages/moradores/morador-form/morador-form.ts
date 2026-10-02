@@ -8,6 +8,7 @@ import { AuthService } from '../../../core/services/AuthService';
 import { NotificationService } from '../../../shared/modals/notification/services/notification-service';
 import { SelectOption } from '../../../shared/components/select/select.component';
 import { InputComponent } from '../../../shared/components/input/input.component';
+import { formatarDataParaInput } from '../../../shared/utils/date-utils';
 
 @Component({
   selector: 'app-morador-form',
@@ -141,10 +142,10 @@ export class MoradorForm implements OnInit, AfterViewInit {
       email: this.form.get('email')?.value,
       isProprietario: this.form.get('isProprietario')?.value,
       imovelId: Number(this.form.get('imovelId')?.value),
-      dataEntrada: new Date(this.form.get('dataEntrada')?.value).toISOString(),
-      dataSaida: this.form.get('dataSaida')?.value ? new Date(this.form.get('dataSaida')?.value).toISOString() : null,
-      dataInclusao: new Date().toISOString(),
-      dataAlteracao: Number(this.form.get('id')?.value) !== 0 ? new Date().toISOString() : null
+      dataEntrada: formatarDataParaInput(this.form.get('dataEntrada')?.value),
+      dataSaida: this.form.get('dataSaida')?.value ? formatarDataParaInput(this.form.get('dataSaida')?.value) : null,
+      dataInclusao: formatarDataParaInput(new Date()),
+      dataAlteracao: Number(this.form.get('id')?.value) !== 0 ? formatarDataParaInput(new Date()) : null
     };
 
     this.isSaving = true;
