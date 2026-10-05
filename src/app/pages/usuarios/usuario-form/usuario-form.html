@@ -1,0 +1,53 @@
+<h2>{{ form.get('id')?.value ? 'Editar Usuário' : 'Novo Usuário' }}</h2>
+
+<form [formGroup]="form" class="form-container" (ngSubmit)="salvar()" autocomplete="off">
+
+  <div *ngIf="id" class="form-group">
+    <app-input
+      label="Código"
+      type="text"
+      formControlName="id"
+      [readonly]="true">
+    </app-input>
+  </div>
+
+  <app-input
+    label="Usuário"
+    formControlName="userName"
+    [required]="true"
+    [error]="form.get('userName')?.invalid && formSubmetido ? 'Usuário é obrigatório' : ''">
+  </app-input>
+
+  <app-input
+    label="E-mail"
+    type="email"
+    formControlName="email"
+    [required]="true"
+    [error]="form.get('email')?.invalid && formSubmetido ? 'E-mail obrigatório ou formato inválido' : ''">
+  </app-input>
+
+  <app-select
+    label="Perfil"
+    formControlName="role"
+    [options]="tiposRole"
+    [required]="true"
+    [error]="form.get('role')?.invalid && formSubmetido ? 'Perfil é obrigatório' : ''">
+  </app-select>
+
+  <div class="form-group" *ngIf="form.get('role')?.value !== 'Suporte'">
+    <app-select
+      label="Empresa"
+      formControlName="empresaId"
+      [options]="empresaOptions">
+    </app-select>
+  </div>
+
+  <div class="form-actions">
+    <app-button type="submit" variant="primary" size="md" [disabled]="isSaving || form.invalid">{{ isSaving ? 'Aguarde...' : 'Salvar' }}</app-button>
+    <app-button type="button" variant="outline" size="md" (click)="cancelar()">Cancelar</app-button>
+  </div>
+  <!-- DEBUG: botão temporário para inspecionar estado do formulário -->
+  <div style="margin-top:8px;">
+    <button type="button" (click)="logForm()" style="padding:6px 10px;">Debug: Log Form</button>
+  </div>
+</form>

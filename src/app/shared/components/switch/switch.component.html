@@ -1,0 +1,16 @@
+<div class="switch">
+  <label class="switch-wrapper">
+    <input
+      [id]="id"
+      type="checkbox"
+      class="form-control-checkbox"
+      [checked]="value"
+      [disabled]="disabled"
+      [required]="required"
+      (change)="onSwitchChange($event)"
+      (blur)="onSwitchBlur()"
+    />
+    <span class="slider" aria-hidden="true"></span>
+    <span class="label-text">{{ label }}</span>
+  </label>
+</div>

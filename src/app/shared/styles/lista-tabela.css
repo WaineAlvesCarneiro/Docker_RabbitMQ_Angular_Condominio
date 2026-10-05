@@ -1,0 +1,130 @@
+.itens-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg-surface, #fff);
+  border-radius: var(--radius-2, 8px);
+  overflow: hidden;
+  box-shadow: var(--shadow-md, 0 6px 18px rgba(27, 39, 51, 0.08));
+}
+
+.itens-table thead {
+  background: var(--bg-gradient, linear-gradient(90deg, #f5f7fa, #eef2f6));
+  color: var(--color-text-strong, #334155);
+  font-weight: 600;
+}
+
+.itens-table th,
+.itens-table td {
+  padding: var(--space-sm, 12px) var(--space-md, 14px);
+  text-align: left;
+  vertical-align: middle;
+  font-size: var(--font-size-sm, 14px);
+  color: var(--color-text, #475569);
+}
+
+.itens-table tbody tr {
+  background: #fff;
+  transition: background 0.12s ease;
+}
+
+.itens-table tbody tr:hover {
+  background: var(--surface-hover, #fbfdff);
+}
+
+.itens-table .actions {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.itens-table .actions app-button {
+  margin: 0 var(--space-xs, 4px);
+}
+
+.itens-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.itens-table th .sort-indicator {
+  opacity: 0.5;
+  margin-left: var(--space-2, 6px);
+  font-size: var(--font-size-xs, 12px);
+}
+
+.itens-table th.sorted-asc .sort-indicator {
+  transform: rotate(-180deg);
+  opacity: 1;
+}
+
+.itens-table th.sorted-desc .sort-indicator {
+  transform: rotate(0deg);
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .itens-table thead {
+    display: none;
+  }
+
+  .itens-table,
+  .itens-table tbody,
+  .itens-table tr,
+  .itens-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .itens-table tr {
+    margin-bottom: 12px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 10px;
+  }
+
+  .itens-table td {
+    border-bottom: 1px solid #eee;
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .itens-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 10px;
+    font-weight: 600;
+    text-align: left;
+    color: #334155;
+  }
+
+  .itens-table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+.status.sim {
+  color: var(--color-success, #16a34a);
+  font-weight: 600;
+}
+
+.status.nao {
+  color: var(--color-danger, #ef4444);
+  font-weight: 600;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.list-title {
+  font-size: var(--font-size-lg, 20px);
+  font-weight: var(--font-weight-700, 700);
+}
