@@ -71,7 +71,7 @@
           <app-button variant="outline" size="sm" (click)="editar(item.id)"><span class="icon">
             ✎</span> <span>Editar</span>
           </app-button>
-          <app-button variant="danger" size="sm" (click)="excluir(item.id)"><span class="icon">
+          <app-button *ngIf="userRole !== 'Porteiro'" variant="danger" size="sm" (click)="excluir(item.id)"><span class="icon">
             🗑</span> <span>Excluir</span>
           </app-button>
         </td>
